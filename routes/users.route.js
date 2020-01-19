@@ -20,18 +20,24 @@ const users = [
  * @swagger
  * components:
  *  schemas:
- *    UserModel:
+ *    CreateUserModel:
  *      type: object
  *      properties:
- *        id:
- *          type: string
- *          example: '0'
  *        username:
  *          type: string
  *          example: 'foo@email.com'
  *        name:
  *          type: string
  *          example: 'Foo Bar'
+ * 
+ *    UserModel:
+ *      allOf:
+ *        - $refs: '#/components/schemas/CreateUserModel'
+ *        - type: object
+ *          properties:
+ *            id:
+ *              type: string
+ *              example: '0'
 */
 
 /**
@@ -39,6 +45,7 @@ const users = [
  * /users/{id}:
  *  get:
  *    summary: Retrieves a user by a given id
+ *    operationalId: getUserId
  *    security:
  *      - BearerAuth: []
  *    parameters:
@@ -97,5 +104,47 @@ router.get('/:id', jwt, (req, res) => {
 router.get('/', jwt, (req, res) => {
     return res.send(users);
 });
+
+/**
+ * @swagger
+ * /users:
+ *  post:
+ *    summary: Create a user
+ *    operationalId: createUser
+ *    requestBody:
+ *      required: true
+ *      description: A JSON Object to create a user
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/CreateUserModel'
+ *    responses:
+ *      201:
+ *        description: User create endpoint
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                id:
+ *                  type: string
+ *                  description: ID of the created user
+ *                  example: '0'
+ *        links:
+ *          GetUserByUserId:
+ *            operationId: getUserId
+ *            parameters:
+ *              id: $response.body#/id
+ *            description: The `id` value returned by creating a user
+ *      401:
+ *        description: Unauthorized
+*/
+router.post('/', (req ,res) => {
+  const id = users.length;
+  users.push(req.body);
+
+  res.send({ id });
+})
+
 
 module.exports = router;
