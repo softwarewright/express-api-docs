@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const usersRoutes = require('./users.route');
 const loginRoutes = require('./login.route');
+const healthRoutes = require('./health.route');
 
 /**
  * @swagger
@@ -14,5 +15,6 @@ const loginRoutes = require('./login.route');
 
 router.use('/users', usersRoutes);
 router.use('/login', loginRoutes);
+router.use('/health', healthRoutes);
 
 module.exports = router;

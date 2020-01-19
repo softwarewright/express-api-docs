@@ -10,7 +10,7 @@ const options = {
       description: 'Service used to manage users and user login'
     },
     servers: [
-      { url: "http://localhost:3000", description: "Local API"},
+      { url: "http://localhost:3000", description: "Local API"}
     ]
   },
   apis: ['./routes/**/*.js'],
