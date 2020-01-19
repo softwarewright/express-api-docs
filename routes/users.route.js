@@ -44,6 +44,8 @@ const users = [
  * @swagger
  * /users/{id}:
  *  get:
+ *    tags:
+ *      - user
  *    summary: Retrieves a user by a given id
  *    operationalId: getUserId
  *    security:
@@ -84,6 +86,8 @@ router.get('/:id', jwt, (req, res) => {
  * @swagger
  * /users:
  *  get:
+ *    tags:
+ *      - user
  *    summary: Retrieves all users
  *    produces:
  *      - application/json
@@ -109,6 +113,8 @@ router.get('/', jwt, (req, res) => {
  * @swagger
  * /users:
  *  post:
+ *    tags:
+ *      - user
  *    summary: Create a user
  *    operationalId: createUser
  *    requestBody:

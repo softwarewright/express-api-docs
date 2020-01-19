@@ -23,6 +23,8 @@ const router = require("express").Router();
  * @swagger
  * /login:
  *  post:
+ *    tags:
+ *      - login
  *    summary: Login endpoint for username and password combination
  *    requestBody:
  *      description: The username and password of the user
