@@ -18,3 +18,5 @@ If you have [SAM Local](https://github.com/awslabs/aws-sam-cli) installed you ca
 ``` bash
 npm run serverless
 ```
+
+After running the project navigate to http://localhost:3000/api-docs to see the Swagger Docs for the test application.
